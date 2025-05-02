@@ -26,12 +26,12 @@ while True:
     voltaje = (pot_valor / 65535.0) * 3.3
 
     # Leer DHT11
-    sensor_dht.measure()
-    temperatura = sensor_dht.temperature()
-    humedad = sensor_dht.humidity()
+    sensor_dht.measure() # Solicita al sensor DHT11 que realice una medición de temperatura y humedad
+    temperatura = sensor_dht.temperature() # Obtiene la temperatura medida por el DHT11 y la guarda en la variable 'temperatura'
+    humedad = sensor_dht.humidity() # Obtiene la humedad relativa medida por el DHT11 y la guarda en la variable 'humedad'
     
     #Leer RQ-S001
-    sonido_valor = sensor_sonido.read_u16()
+    sonido_valor = sensor_sonido.read_u16()  # Lee el valor del sensor de sonido
     
     #Guarda la fecha y hora (Timestamp)
     timestamp = time.localtime()
