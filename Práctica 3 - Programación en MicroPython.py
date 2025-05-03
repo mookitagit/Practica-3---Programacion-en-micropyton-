@@ -35,15 +35,15 @@ while True:
     sonido_valor = sensor_sonido.read_u16()  # Lee el valor del sensor de sonido
     
     #Guarda la fecha y hora (Timestamp)
-    timestamp = time.localtime()
-    año, mes, dia, hora, minuto, segundo, *_ = timestamp
-    timestamp_str = "{:04d}-{:02d}-{:02d} {:02d}:{:02d}:{:02d}".format(año, mes, dia, hora, minuto, segundo)
+    timestamp = time.localtime() # Estás obteniendo la fecha y hora local actual
+    año, mes, dia, hora, minuto, segundo, *_ = timestamp #descompone los primeros seis elementos del objeto 
+    timestamp_str = "{:04d}-{:02d}-{:02d} {:02d}:{:02d}:{:02d}".format(año, mes, dia, hora, minuto, segundo) #convierte los valores numéricos de fecha y hora en una cadena con formato legible
     
     # Mostrar en terminal
-    print(f"Fecha y hora: {timestamp_str}| Voltaje: {voltaje:.2f} V | Temperatura: {temperatura} °C | Humedad: {humedad}% | Sonido: {sonido_valor}")
+    print(f"Fecha y hora: {timestamp_str}| Voltaje: {voltaje:.2f} V | Temperatura: {temperatura} °C | Humedad: {humedad}% | Sonido: {sonido_valor}") #imprime un mensaje formateado y legible con información de fecha, hora y diversas mediciones
 
     # Guardar en CSV solo si hay lectura válida
-    with open(archivo, "a") as f:
-        f.write(f"{timestamp_str}, {voltaje:.2f},{temperatura},{humedad}, {sonido_valor}\n")
-
+    with open(archivo, "a") as f: #bre un archivo en modo "append" (adición) para escribir datos sin borrar lo anterior
+        f.write(f"{timestamp_str}, {voltaje:.2f},{temperatura},{humedad}, {sonido_valor}\n") #escribe una línea de datos en formato CSV, con valores separados por comas
+ 
     time.sleep(0.5)  # Leer cada medio segundo
