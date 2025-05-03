@@ -4,9 +4,9 @@
 
 # 30 / 04 / 2025 - V. 2. 0. 0 - INTEGRACIÓN DE SENSORES Y PROCESAMIENTO DE DATOS CON MICROPYTHON.
 
-import machine
-import time
-import dht
+import machine # Librería para controlar hardware como pines
+import time # Librería para trabajar con tiempo y fechas
+import dht # Librería para interactuar con el sensor DHT11
 
 # Inicialización de pines
 sensor_dht = dht.DHT11(machine.Pin(4))       # GP4
@@ -14,16 +14,17 @@ pot = machine.ADC(26)                        # GP26 / ADC0
 sensor_sonido = machine.ADC(27)              # GP27 / ADC1
 
 # Archivo CSV
-archivo = "datos.csv"
+archivo = "datos.csv" # Nombre del archivo donde se guardará
 
 # Sobrescribir archivo al iniciar (limpiar datos anteriores y escribir encabezado)
-with open(archivo, "w") as f:
-    f.write("Fecha y Hora,Voltaje(V),Temperatura(C),Humedad(%), Sonido\n")
+with open(archivo, "w") as f:  # Abre el archivo en modo escritura para limpiarlo y crear encabezados
+    f.write("Fecha y Hora,Voltaje(V),Temperatura(C),Humedad(%), Sonido\n") # Encabezados de columnas
+
 
 while True:
     # Leer ADC (potenciómetro)
     pot_valor = pot.read_u16()               # Valor de 0 a 65535
-    voltaje = (pot_valor / 65535.0) * 3.3
+    voltaje = (pot_valor / 65535.0) * 3.3 # Conversión del valor leído a voltaje real en el rango de 0 a 3.3V
 
     # Leer DHT11
     sensor_dht.measure() # Solicita al sensor DHT11 que realice una medición de temperatura y humedad
